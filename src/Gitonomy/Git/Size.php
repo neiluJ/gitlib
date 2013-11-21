@@ -60,7 +60,7 @@ class Size
 
         try {
             $parser = new Parser\SizeParser();
-            $output = $this->repository->run('count-objects -v');
+            $output = $this->repository->run('count-objects', array('-v'));
         } catch (RuntimeException $e) {
             $output = $e->getOutput();
             $error  = $e->getErrorOutput();

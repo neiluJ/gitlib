@@ -32,16 +32,22 @@ class SizeParser extends ParserBase
         while (!$this->isFinished()) {
             $this->consume("count: ");
             $this->objects = $this->consumeTo("\n");
+            $this->consumeNewLine();
             $this->consume("size: ");
             $this->size = $this->consumeTo("\n");
+            $this->consumeNewLine();
             $this->consume("in-pack: ");
             $this->inPack = $this->consumeTo("\n");
+            $this->consumeNewLine();
             $this->consume("packs: ");
             $this->packs = $this->consumeTo("\n");
+            $this->consumeNewLine();
             $this->consume("size-pack: ");
             $this->sizePack = $this->consumeTo("\n");
+            $this->consumeNewLine();
             $this->consume("prune-packable: ");
             $this->prunePackable = $this->consumeTo("\n");
+            $this->consumeNewLine();
             $this->consume("garbage: ");
             $this->garbage = $this->consumeTo("\n");
             $this->consumeNewLine();

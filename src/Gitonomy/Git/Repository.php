@@ -163,7 +163,7 @@ class Repository
     {
         return null === $this->workingDir;
     }
-
+    
     /**
      * Returns the HEAD resolved as a commit.
      *
@@ -400,33 +400,13 @@ class Repository
     }
 
     /**
-     * Returns the size of repository, in kilobytes.
+     * Returns size informations about the repository
      *
-     * @return int A sum, in kilobytes
-     *
-     * @throws RuntimeException An error occurred while computing size
+     * @return Size The Size object
      */
     public function getSize()
     {
-        $process = ProcessBuilder::create(array('du', '-skc', $this->gitDir))->getProcess();
-
-        $process->run();
-
-        if (!preg_match('/(\d+)\s+total$/', trim($process->getOutput()), $vars)) {
-            $message = sprintf("Unable to parse process output\ncommand: %s\noutput: %s", $process->getCommandLine(), $process->getOutput());
-
-            if (null !== $this->logger) {
-                $this->logger->error($message);
-            }
-
-            if (true === $this->debug) {
-                throw new RuntimeException('unable to parse repository size output');
-            }
-
-            return null;
-        }
-
-        return $vars[1];
+        return new Size($this);
     }
 
     /**
